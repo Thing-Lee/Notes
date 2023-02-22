@@ -1,0 +1,161 @@
+\documentclass{article} %oneside消除奇偶页出现的空页问题，页眉也会随之改变
+\usepackage[zihao=-4]{ctex} %引入中文宏包
+\usepackage{ulem}%提供\uline命令引入高低一致的下划线
+\usepackage{amsmath}%数学公式排版
+\usepackage{amssymb}%用命令 \mathbb
+\usepackage{geometry}%编辑页面边距
+\usepackage{pifont}%编辑带圈数字
+\usepackage{fancyhdr}%风格
+\usepackage[backref]{hyperref}%超链接
+\usepackage{color}%字体颜色
+\usepackage{extarrows}%输入带文字的长等号
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage} % 提供一个 adjustwidth 环境
+\usepackage{framed} % 实现方框效果
+\usepackage{amsthm}
+
+% ----------------插入代码----------------
+\usepackage{listings}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset
+{
+    frame=tb,
+    language=Matlab,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,%设置行号位置none不显示行号
+    %numberstyle=\tiny\courier, %设置行号大小
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    escapeinside=``,%逃逸字符(1左面的键)，用于显示中文例如在代码中`中文...`
+    tabsize=4,
+    extendedchars=false %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+}
+
+
+\hypersetup{colorlinks=true,linkcolor=cyan,anchorcolor=megenta,citecolor=yellow}
+\geometry{right=2.5cm,left=2.5cm,top=2.5cm,bottom=2.5cm}
+\renewcommand{\headrulewidth}{0pt}%去掉页眉分划
+\pagestyle{fancy}
+
+% ------------------文字底色------------------
+\newtheorem{example}{}
+\newtheorem{examp}{}
+\definecolor{egshade}{rgb}{0.96,0.96,0.96}% 
+\newenvironment{eg}{%
+\def\FrameCommand{%
+\hspace{1pt}%
+{\color{Gray}\vrule width 2pt}%竖线颜色
+{\color{egshade}\vrule width 4pt}%
+\colorbox{egshade}%
+}%
+\MakeFramed{\advance\hsize-\width\FrameRestore}%
+\noindent\hspace{-4.55pt}% 
+\begin{adjustwidth}{}{7pt}%
+\vspace{2pt}\vspace{2pt}%
+\normalfont %环境字体设置
+}
+{%
+\vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+\newtheorem{warning}{}  
+\definecolor{washade}{rgb}{0.99,0.95,0.94} % 方框底部颜色
+\newenvironment{wa}{%
+\def\FrameCommand{%
+\hspace{1pt}%
+{\color{LightCoral}\vrule width 2pt}%竖线颜色
+{\color{washade}\vrule width 4pt}%
+\colorbox{washade}%
+}%
+\MakeFramed{\advance\hsize-\width\FrameRestore}%
+\noindent\hspace{-4.55pt}% disable indenting first paragraph
+\begin{adjustwidth}{}{7pt}%
+\vspace{2pt}\vspace{2pt}%
+\normalfont %
+}
+{%
+\vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+
+
+% ----------------------正文------------------------------------------------------------
+\begin{document} 
+\centerline{\LARGE \textbf{数学软件} }\par 
+
+% ---------------23.02.21----------------
+\noindent \Large \textbf{23.02.21} \par \normalsize
+\begin{eg}
+    1.计算$\sum \limits _{i=1}^{100} 2^{i}$ \par
+\end{eg}
+\begin{lstlisting}
+    i = 1 : 100
+    a = 2.^i    % i 是向量，所以要用点乘
+    sum(a)
+\end{lstlisting}
+
+
+\begin{eg}
+    2.将数取整的几种方式
+\end{eg}
+\begin{lstlisting}
+    a = 5.3
+    floor(a)   %向下取整
+    ceil(a)    %向上取整
+    round(a)    %四舍五入
+\end{lstlisting}
+
+\begin{eg}
+    3.自定义函数
+\end{eg}
+\begin{lstlisting}
+    function y = gab(x)
+    y = log2(abs(x^2 - 5)) + (sin(x) + cos(x))^6; 
+    %新建一个 gab.m 文件将函数自定义，在命令行窗口可直接求得gab(x)的值
+\end{lstlisting}
+\begin{lstlisting}
+    function y = gaa(x)
+    y = 100*(x(2) - x(1))^2 + x(1)*x(2);
+    %两个自变量的情况，命定行窗口gaa([x1,x2])
+\end{lstlisting}
+
+\begin{eg}
+    4.取值问题
+\end{eg}
+\begin{lstlisting}
+    i = 4 : 2 : 10  %从4到10，步长为2的所有数
+    linspace(1 ,10 ,5)  %从1到10等长取5个数
+    logspace(1 ,1024 ,10)   %创建行向量，从10^1到10^1024，生成总数为10的等比数列
+\end{lstlisting}
+
+\begin{eg}
+    5.矩阵的常见使用函数
+\end{eg}
+\begin{lstlisting}
+    a = [1 2 3 ;4 5 6 ;7 8 9]
+    a'  %转置
+    a( : , 3) = [ ]   %去除第3列
+    a( 2, : ) = [ ]   %去除第2行
+    det(a)  %求行列式
+    inv(a)  %求逆
+    rank(a)  %求秩
+    format rat  %用分数形式表示数值
+\end{lstlisting}
+
+
+
+
+
+
+
+\end{document}
