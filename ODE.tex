@@ -1,0 +1,246 @@
+\documentclass[oneside]{book} %oneside消除奇偶页出现的空页问题，页眉也会随之改变
+\usepackage[zihao=-4]{ctex} %引入中文宏包
+\usepackage{ulem}%提供\uline命令引入高低一致的下划线
+\usepackage{amsmath}%数学公式排版
+\usepackage{amssymb}%用命令 \mathbb
+\usepackage{geometry}%编辑页面边距
+\usepackage{pifont}%编辑带圈数字
+\usepackage{fancyhdr}%风格
+\usepackage[backref]{hyperref}%超链接
+\usepackage{color}%字体颜色
+\usepackage{extarrows}%输入带文字的长等号
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage} % 提供一个 adjustwidth 环境
+\usepackage{framed} % 实现方框效果
+\usepackage{amsthm}
+
+\usepackage{tikz}
+\usetikzlibrary{mindmap,trees}
+\usepackage{verbatim}
+
+
+\hypersetup{colorlinks=true,linkcolor=cyan,anchorcolor=megenta,citecolor=yellow}
+\geometry{right=2.5cm,left=2.5cm,top=2.5cm,bottom=2.5cm}
+\renewcommand{\headrulewidth}{0pt}%去掉页眉分划
+\pagestyle{fancy}
+
+
+% ------------------******-------------------
+\newtheorem{lemma}{推论}[section]  %推论
+% environment derived from framed.sty: see leftbar environment definition
+\definecolor{lashade}{rgb}{0.97,0.96,0.99} % 方框底部颜色
+% ------------------******-------------------
+% 注意行末需要把空格注释掉，不然画出来的方框会有空白竖线
+\newenvironment{la}{%
+\def\FrameCommand{%
+\hspace{1pt}%
+{\color{RoyalPurple}\vrule width 2pt}%竖线颜色
+{\color{lashade}\vrule width 4pt}%
+\colorbox{lashade}%
+}%
+\MakeFramed{\advance\hsize-\width\FrameRestore}%
+\noindent\hspace{-4.55pt}% disable indenting first paragraph
+\begin{adjustwidth}{}{7pt}%
+\vspace{2pt}\vspace{2pt}%
+\normalfont %环境字体设置
+}
+{%
+\vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+\newtheorem*{example}{例}
+\newtheorem{examp}{例}
+\definecolor{egshade}{rgb}{0.96,0.96,0.96}% 
+\newenvironment{eg}{%
+\def\FrameCommand{%
+\hspace{1pt}%
+{\color{Gray}\vrule width 2pt}%竖线颜色
+{\color{egshade}\vrule width 4pt}%
+\colorbox{egshade}%
+}%
+\MakeFramed{\advance\hsize-\width\FrameRestore}%
+\noindent\hspace{-4.55pt}% 
+\begin{adjustwidth}{}{7pt}%
+\vspace{2pt}\vspace{2pt}%
+\normalfont %环境字体设置
+}
+{%
+\vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+\newtheorem{definition}{定义}[section]  
+\newtheorem{defini}{}
+\newtheorem{theorem}{定理}[section]  
+\newtheorem{theo}{}  
+\definecolor{tdshade}{rgb}{0.94,0.97,0.93} % 
+\newenvironment{td}{%
+\def\FrameCommand{%
+\hspace{1pt}%
+{\color{Green}\vrule width 2pt}%竖线颜色
+{\color{tdshade}\vrule width 4pt}%
+\colorbox{tdshade}%
+}%
+\MakeFramed{\advance\hsize-\width\FrameRestore}%
+\noindent\hspace{-4.55pt}% 
+\begin{adjustwidth}{}{7pt}%
+\vspace{2pt}\vspace{2pt}%
+\normalfont %
+}
+{%
+\vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+
+\newtheorem{warning}{注}[section]  
+\definecolor{washade}{rgb}{0.99,0.95,0.94} % 方框底部颜色
+\newenvironment{wa}{%
+\def\FrameCommand{%
+\hspace{1pt}%
+{\color{LightCoral}\vrule width 2pt}%竖线颜色
+{\color{washade}\vrule width 4pt}%
+\colorbox{washade}%
+}%
+\MakeFramed{\advance\hsize-\width\FrameRestore}%
+\noindent\hspace{-4.55pt}% disable indenting first paragraph
+\begin{adjustwidth}{}{7pt}%
+\vspace{2pt}\vspace{2pt}%
+\normalfont %
+}
+{%
+\vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+
+
+
+
+% ------------------正文-------------------
+
+\begin{document} 
+
+\tableofcontents %生成目录
+% --------------第一章----------------
+\chapter{第一章 \ 绪论}
+% ---------------1.1----------------        
+\section{微分方程概述}
+\begin{center} 
+    \begin{tikzpicture}
+        \path[small mindmap,concept color = red!65,text = black]
+            node[concept] {方程}
+            [clockwise from=25]
+            child[concept color = red!50] 
+            {
+                node[concept] {未知量（数）}
+                [clockwise from=25]
+                child [concept color = red!40] 
+                { 
+                    node[concept] {代数方程} 
+                }
+                child [concept color = red!40] 
+                { 
+                    node[concept] {超越方程} 
+                }     
+            }
+            child[concept color = red!50] 
+            {
+                node[concept] {未知函数}
+                [clockwise from=0]
+                child [concept color = red!40] 
+                { 
+                    node[concept] {函数方程} 
+                    child [concept color = red!30] 
+                    { 
+                        node[concept] {微分方程} 
+                    }
+                }
+            };
+    \end{tikzpicture}
+\end{center}
+
+
+\indent \textbf{方程：}含有未知量（数）的等式或关系式
+
+\textbf{代数方程：}含有超越数。特点：方程的解为有限个或无限个实数
+
+\textbf{函数方程：}其未知量为函数。特点：方程的解为有限个或无限个函数
+
+\textbf{\textcolor{red}{微分方程：}}自变量、未知函数及函数的导数（或微分）组成的关系式
+
+\textbf{常微分方程：}自变量只有一个时的微分方程
+
+\textbf{偏微分方程：}自变量有多个时的微分方程
+
+
+% ----------------1.2-----------------
+\section{基本概念}
+\subsubsection{1.阶数}
+\noindent \pmb{定义：}在一个微分方程中所出现的未知函数的导数的最高阶数n称为该方程的\textbf{\textcolor{red}{阶}}
+
+一阶微分方程：$n = 1$
+
+高阶微分方程：$n > 1$
+
+\noindent \pmb{基本表示：}
+
+\noindent 一阶常微分方程的一般隐式形式
+$$ F(x,y,y') = 0$$
+一阶常微分方程的一般显式形式
+$$y' = f(x,y)$$
+$n$阶隐方程的一般形式
+$$ F(x,y,y',\dots,y^{(n)}) = 0$$
+$n$阶显方程的一般形式
+$$y^{(n)} = f(x,y,y',\dots,y^{(n-1)})$$
+
+
+\subsubsection{2.线性、非线性}
+\noindent \pmb{定义：}若方程的左端为$y$，$\frac{dy}{dx}$，$\dots$，$\frac{d^n y}{d x^n} $，的一次有理整式，则称它为
+线性微分方程，否则，称它为非线性微分方程
+
+\noindent \pmb{一般形式：}
+$$a_{0}(x)y^{(n)} + a_{1}(x)y^{(n - 1)} + \dots + a_{n}(x)y = g(x)$$
+$$\frac{d^n y}{d x^n} + a_{1}(x)\frac{d^{n-1} y}{d x^{n-1}} + \dots + a_{n -1}(x)\frac{dy}{dx} + a_{n}(x)y = f(x)  $$
+
+
+\subsubsection{3.解和隐式解}
+\noindent \pmb{定义：}若将函数$y = \varphi(x)$代入方程后使微分方程有意义且为恒等式，为方程的\textbf{解};若方程的解是某关系式的隐函数，称这个关系式为该方程
+的\textbf{隐式解}。把方程解和隐式解统称为方程的解。
+
+\subsubsection{4.通解和特解}
+\noindent \pmb{定义：}$n$阶微分方程的含有$n$个独立的任意常数$c_{1},c_{2},\dots,c_{n}$的解$y = \varphi(x,c_{1},c_{2},\dots,c_{n})$称为$n$阶方程的\textbf{通解}；常微分方程满足某个初始条件的解称为微分方程的特解
+
+\noindent \pmb{定解条件：}确定微分方程的一个特定的解，给出这个解所必需的条件
+
+\noindent \pmb{初值条件：}对于$n$阶方程$y^{(n)} = f(x,y,y',\dots,y^{(n-1)})$的初值条件可表示为
+$$y(x_{0}) = y_{0} \quad y'(x_{0}) = y'_{0} \quad y''(x_{0}) = y''_{0} \quad \dots \quad y^{(n-1)}(x_{0}) = y^{(n-1)}_{0}$$
+\pmb{定解问题：}求微分方程满足定解条件的解
+\pmb{初值问题：}当定解问题为初值条件时相应的定解问题
+n阶方程初值问题的表示
+\[
+\begin{cases}
+    y^{(n)} = f(x,y,y',\dots,y^{(n-1)}) \\
+    y(x_{0}) = y_{0} , y'(x_{0}) = y'_{0} , y''(x_{0}) = y''_{0} , \dots , y^{(n-1)}(x_{0}) = y^{(n-1)}_{0}
+\end{cases}\]
+一阶和二阶方程初值问题的表示
+\[
+\begin{cases}
+    y' = f(x,y) \\
+    y(x_{0}) = y_{0}
+\end{cases}
+\begin{cases}
+    y'' = f(x,y,y') \\
+    y(x_{0}) = y_{0} , y'(x_{0}) = y'_{0}
+\end{cases}
+\]
+\pmb{特解：}满足初值条件的解
+
+\subsubsection{5.积分曲线和向量场}
+\noindent \pmb{积分曲线：}一阶微分方程$\frac{dy}{dx}$的解$y = \varphi(x)$表示$Oxy$平面上的一条曲线；通解$y = \varphi(x,c)$表示平面上的一族曲线，称为\textbf{积分曲线族}；特解$\varphi(x_{0}) = y_{0}$则为过点$(x_{0},y_{0})$的一条积分曲线
+
+\noindent \pmb{方向场(向量场)：}$f(x , y) = \frac{dy}{dx}$在$Oxy$平面某区域$D$上定义过各点的小线段的斜率方向，这样的区域$D$称为向量场
+
+\noindent \pmb{常微分方程求解的几何意义：}在方向场中寻求一条曲线，使这条曲线上每一点切线的方向等于方向场中该点的方向
+
+\chapter{第二章 \ 一阶微分方程的初等解法}
+
+
+\end{document}
