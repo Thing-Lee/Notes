@@ -5,7 +5,7 @@
 \usepackage{amssymb}%用命令 \mathbb
 \usepackage{geometry}%编辑页面边距
 \usepackage{pifont}%编辑带圈数字
-\usepackage{fancyhdr}%风格
+\usepackage{fancyhdr}%风格,页眉页脚
 \usepackage[backref]{hyperref}%超链接
 \usepackage{color}%字体颜色
 \usepackage{extarrows}%输入带文字的长等号
@@ -23,7 +23,8 @@
 \geometry{right=2.5cm,left=2.5cm,top=2.5cm,bottom=2.5cm}
 \renewcommand{\headrulewidth}{0pt}%去掉页眉分划
 \pagestyle{fancy}
-
+\fancyhead[L]{}
+\fancyhead[R]{\rightmark}
 
 % ------------------******-------------------
 \newtheorem{lemma}{推论}[section]  %推论
@@ -193,7 +194,7 @@ $$y^{(n)} = f(x,y,y',\dots,y^{(n-1)})$$
 
 
 \subsubsection{2.线性、非线性}
-\noindent \pmb{定义：}若方程的左端为$y$，$\frac{dy}{dx}$，$\dots$，$\frac{d^n y}{d x^n} $，的一次有理整式，则称它为
+\noindent \pmb{定义：}若方程的左端为$y$，$\dfrac{dy}{dx}$，$\dots$，$\dfrac{d^n y}{d x^n} $，的一次有理整式，则称它为
 线性微分方程，否则，称它为非线性微分方程
 
 \noindent \pmb{一般形式：}
@@ -206,14 +207,15 @@ $$\frac{d^n y}{d x^n} + a_{1}(x)\frac{d^{n-1} y}{d x^{n-1}} + \dots + a_{n -1}(x
 的\textbf{隐式解}。把方程解和隐式解统称为方程的解。
 
 \subsubsection{4.通解和特解}
-\noindent \pmb{定义：}$n$阶微分方程的含有$n$个独立的任意常数$c_{1},c_{2},\dots,c_{n}$的解$y = \varphi(x,c_{1},c_{2},\dots,c_{n})$称为$n$阶方程的\textbf{通解}；常微分方程满足某个初始条件的解称为微分方程的特解
+\noindent \pmb{定义：}$n$阶微分方程的含有$n$个独立的任意常数$c_{1},c_{2},\dots,c_{n}$的解$y = \varphi(x,c_{1},c_{2},\dots,c_{n})$称为$n$阶方程的\textcolor{red}{\textbf{通解}}；常微分方程满足某个初始条件的解称为微分方程的特解
 
 \noindent \pmb{定解条件：}确定微分方程的一个特定的解，给出这个解所必需的条件
 
 \noindent \pmb{初值条件：}对于$n$阶方程$y^{(n)} = f(x,y,y',\dots,y^{(n-1)})$的初值条件可表示为
 $$y(x_{0}) = y_{0} \quad y'(x_{0}) = y'_{0} \quad y''(x_{0}) = y''_{0} \quad \dots \quad y^{(n-1)}(x_{0}) = y^{(n-1)}_{0}$$
 \pmb{定解问题：}求微分方程满足定解条件的解
-\pmb{初值问题：}当定解问题为初值条件时相应的定解问题
+
+\noindent \pmb{初值问题：}当定解问题为初值条件时相应的定解问题
 n阶方程初值问题的表示
 \[
 \begin{cases}
@@ -234,13 +236,107 @@ n阶方程初值问题的表示
 \pmb{特解：}满足初值条件的解
 
 \subsubsection{5.积分曲线和向量场}
-\noindent \pmb{积分曲线：}一阶微分方程$\frac{dy}{dx}$的解$y = \varphi(x)$表示$Oxy$平面上的一条曲线；通解$y = \varphi(x,c)$表示平面上的一族曲线，称为\textbf{积分曲线族}；特解$\varphi(x_{0}) = y_{0}$则为过点$(x_{0},y_{0})$的一条积分曲线
+\noindent \pmb{积分曲线：}一阶微分方程$\dfrac{dy}{dx}$的解$y = \varphi(x)$表示$Oxy$平面上的一条曲线；通解$y = \varphi(x,c)$表示平面上的一族曲线，称为\textbf{积分曲线族}；特解$\varphi(x_{0}) = y_{0}$则为过点$(x_{0},y_{0})$的一条积分曲线
 
-\noindent \pmb{方向场(向量场)：}$f(x , y) = \frac{dy}{dx}$在$Oxy$平面某区域$D$上定义过各点的小线段的斜率方向，这样的区域$D$称为向量场
+\noindent \pmb{方向场(向量场)：}$f(x , y) = \dfrac{dy}{dx}$在$Oxy$平面某区域$D$上定义过各点的小线段的斜率方向，这样的区域$D$称为向量场
 
 \noindent \pmb{常微分方程求解的几何意义：}在方向场中寻求一条曲线，使这条曲线上每一点切线的方向等于方向场中该点的方向
 
+\subsubsection{6.计算举例}
+已知$S = S(t)$$S' = S'(t)$
+\begin{align*}
+    \dfrac{d^{2}s}{d t^{2}} & = g \quad \quad \quad \quad \quad \quad \Rightarrow 
+    \dfrac{d^{2}s}{d t^{2}} = \dfrac{dS'}{dt} = g \\
+    dS' & = g dt \quad \quad \quad \quad \quad \Rightarrow 
+    \int dS' = \int g dt \quad \quad \quad \quad \quad \Rightarrow 
+    S' = gt + C_{1} \quad \quad \Rightarrow
+    \dfrac{dS}{dt} = gt + C_{1} \\
+    dS & = (gt + C_{1}) dt \quad \ \Rightarrow 
+    \int dS = \int (gt + C_{1}) dt \quad \quad \Rightarrow 
+    S = \dfrac{1}{2} gt^{2} + C_{1} + C_{2}
+\end{align*}
+
+
+% -------------------第二章-------------------
 \chapter{第二章 \ 一阶微分方程的初等解法}
+% ------------------2.1---------------------
+\section{变量分离方程与变量变换}
+\subsection*{变量分离方程}
+
+\noindent \textbf{定义：}形如$\dfrac{dy}{dx} = f(x) \varphi(y)$的方程，$f(x)$，$\varphi(y)$分别是$x$，$y$的连续函数
+
+\noindent \textbf{求解步骤：}
+
+\ding{172}若$\varphi(y) \neq 0$，则有
+$$\frac{dy}{\varphi(y)} = f(x)dx$$
+\indent 两边同时积分得
+$$\int \frac{dy}{\varphi(y)} = \int f(x) \,dx + c \ \footnote{在ODE中此式代指一个函数，所以等式后加常数c；不同于数分中代指的是一族函数} $$
+\indent \ding{173}若$\varphi(y_{0}) = 0$，则有特解
+$$y = y_{0}$$
+综上：\dots
+
+\textbf{注：}变量分离方程可能是线性($\dfrac{dy}{dx} = xy$)，也可能是非线性($\dfrac{dy}{dx} = xy^{2}$)
+\\ \hspace*{\fill} \\
+\noindent \pmb{例2：}求以下方程通解
+$$\frac{dy}{dx} =P(x)y$$
+\pmb{解：}
+\ding{172}若$\varphi(y) \neq 0$，则有
+$$\frac{dy}{y} = P(x)dx$$
+\indent 两边同时积分得
+$$\ln \left\lvert y\right\rvert = \int P(x) \,dx + \overline{c} $$
+\indent 通解为
+$$\left\lvert y \right\rvert = e^{\int \limits P(x) \,dx + \overline{c}}$$
+\indent 即
+$$y = \pm e^{\overline{c}} \cdot e^{\int \limits P(x) \,dx } = ce^{\int \limits P(x) \,dx } \quad  (c = \pm e^{\overline{c} })$$
+\indent \ding{173}若$\varphi(y_{0}) = 0$，则上式$c = 0$
+
+\indent 故方程的解为\textcolor{red}{$y = ce^{\int \limits P(x) \,dx }$}，其中$c$为任意常数
+
+\subsection*{可化为变量分离方程的类型}
+\noindent \pmb{齐次微分方程：}
+
+\noindent \textbf{定义：}方程形如$$\dfrac{dy}{dx} = g\left(\dfrac{y}{x}\right) $$
+
+\noindent \textbf{求解步骤：}
+
+作变量变换
+$$u = \frac{y}{x}$$
+\indent 两边同时求导得：
+$$\frac{dy}{dx} = x \frac{du}{dx} + u$$
+\indent 代入上式有
+$$\frac{du}{dx} = \frac{g(u) - u}{x}$$
+\indent 下用变量分离的方法求解
+
+\textbf{注：}齐次微分方程可能是线性($\dfrac{dy}{dx} = \dfrac{y}{x}$)，也可能是非线性($\dfrac{dy}{dx} = \dfrac{y^{2}}{x^{2}}$)
+\\ \hspace*{\fill} \\
+\pmb{例4：}解方程
+$$\frac{dy}{dx} = \frac{y}{x} + \tan \dfrac{y}{x}$$
+\pmb{解：}
+作变量变换
+$$u = \frac{y}{x}$$
+\indent 两边同时求导得
+$$\frac{dy}{dx} = x \frac{du}{dx} + u$$
+\indent 代入题给方程得
+$$x \frac{du}{dx} = \tan u$$
+\indent 若$\tan u \neq 0$，分离变量有
+$$\cot u du = \frac{dx}{x}$$
+$$\frac{d \sin u}{\sin u} = \frac{dx}{x}$$
+\indent 两边同时求导得：
+$$\ln \left\lvert \sin u\right\rvert = \ln \left\lvert x\right\rvert + \overline{c} $$
+\indent 即有
+$$\sin u = \pm e^{\overline{c}} \cdot x$$
+\indent 令$\pm e^{\overline{c}} = c$，即有
+$$\sin u = cx$$
+\indent 若$\tan u = 0$，当$c = 0$时满足，为方程特解
+
+综上，原方程的通解为$\sin \dfrac{y}{x} = cx$
+
+
+
+
+
+
+
 
 
 \end{document}

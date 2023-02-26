@@ -94,7 +94,7 @@
 \centerline{\LARGE \textbf{数学软件} }\par 
 
 % ---------------23.02.21----------------
-\noindent \Large \textbf{23.02.21} \par \normalsize
+\noindent \Large \section*{23.02.21} \par \normalsize
 \begin{eg}
     1.计算$\sum \limits _{i=1}^{100} 2^{i}$ \par
 \end{eg}
@@ -151,11 +151,207 @@
     rank(a)  %求秩
     format rat  %用分数形式表示数值
 \end{lstlisting}
+\par
 
+% -----------------23.02.24------------------
+\noindent \Large \section*{23.02.24} \par \normalsize
+\begin{eg}
+    1.输入矩阵
+\end{eg}
+\begin{lstlisting}
+    %----常规----
+    ones(m,n)   %全1
+    zeros(m,n)   %全0
+    eye(m,n)    %单位矩阵
+    %----拼接----
+    >> C = [A B]    %行
 
+C =
 
+     1     1     0     0
+     1     1     0     0
 
+    >> C = [A ;B]   %列
+ 
+C =
 
+     1     1
+     1     1
+     0     0
+     0     0
+
+    %----直接输入----
+    a = [1 2 3 ;4 5 6 ;7 8 9]
+\end{lstlisting}
+
+\begin{eg}
+    2.数组的运算
+
+    当两个数组具有相同的维数时，运算可按元素对元素的方式进行，不同大小或维数的数组不能进行运算P248
+\end{eg}
+
+\begin{eg}
+    3.空矩阵的作用
+\end{eg}
+\begin{lstlisting}
+    %----去掉某行、列----
+    a = [1 2 3 ;4 5 6 ;7 8 9]
+    a( : , 3) = [ ]   %去除第3列
+    a( 2, : ) = [ ]   %去除第2行  
+\end{lstlisting}
+
+\begin{eg}
+    4.矩阵中元素的操作
+\end{eg}
+\begin{lstlisting}
+    %----提取某行、列----
+    a(1: 2, : )    %提取1、2行，所有列
+    a(2 : 2 : 100 , : )    %提取偶数行
+    a( : , 1 : 2 : 99)    %提取奇数行
+    a( : , 99 : -2 : 1)    %提取奇数行逆序
+\end{lstlisting}
+
+\begin{eg}
+    5.矩阵的运算
+\end{eg}
+\begin{lstlisting}
+    A + B   %矩阵加法
+    A * B   %矩阵惩罚
+    det(A)  %方阵的行列式
+    inv(A)  %方阵的逆
+    rank(A)  %求秩
+    eig(A)  %方阵特征值与特征向量
+\end{lstlisting}
+
+\begin{wa}
+    行列式的原始定义
+
+    \noindent 特征值、特征向量的代数和几何意义
+\end{wa}
+
+\begin{eg}
+    6.运算符，详见P248
+\end{eg}
+
+\begin{eg}
+    6.控制流结构
+\end{eg}
+
+\begin{wa}
+    例：计算$\sum \limits _{i=1}^{100} i$ 
+\end{wa}
+\begin{lstlisting}
+    %----for----
+    s = 0
+    for i = 1 : 100
+        s = s + i
+    end
+    %----while----
+    s = 0 , i = 1
+    while i <= 100
+        s = s + i
+        i = i + 1
+    end
+\end{lstlisting}
+
+\begin{wa}
+    例：$1.005^{n} \geqslant 2$，求$n$的最小值
+\end{wa}
+\begin{lstlisting}
+    %----teacher----
+    n = 0   %这里取n = 1也不影响结果
+    while 1.005^n < 2 
+        n = n + 1
+    end
+
+    %----me----
+    n = 0
+    while n < log(2)/log(1.005)
+        n = n + 1
+    end
+\end{lstlisting}
+
+\begin{wa}
+    例：计算$\sum \limits _{i=1}^{100} \dfrac{6^{i - 1}}{7^{C(i)}}$
+    $$C(i) =
+    \begin{cases}
+        2i & i \leqslant 5 \\
+        i^{2} & i > 5
+    \end{cases}
+    $$
+\end{wa}
+\begin{lstlisting}
+    %----if-else----
+    s = 0 
+    for i = 1 : 100
+        if i <= 5
+            t = 6^( i - 1 ) / 7^( 2*i ) 
+        else
+            t = 6^( i - 1 ) / 7^( i^2 ) 
+        end
+            s = s + t 
+    end
+\end{lstlisting}
+
+\begin{wa}
+    例：设
+    $$f(x) = 
+    \begin{cases}
+        x^{2} + 1 & x > 1\\
+        2x & x \leqslant 1
+    \end{cases}
+    $$
+    \indent 求$f(2)$，$f(1)$
+\end{wa}
+\begin{lstlisting}
+    %----新建M文件----
+    function y = fun1(x)
+    if x > 1
+        y = x^2 + 1
+    else
+        y = 2*x
+    end
+\end{lstlisting}
+
+\begin{wa}
+    例：设
+    $$f(x) = 
+    \begin{cases}
+        x^{2} + 1 & x > 1\\
+        2x & 0 < x \leqslant 1 \\
+        x^{3} & x \leqslant 0
+    \end{cases}
+    $$
+    \indent 求$f(2)$，$f(0.5)$，$f(-1)$
+\end{wa}
+\begin{lstlisting}
+    %----新建M文件----
+    function y = fun1(x)
+    if x > 1
+        y = x^2 + 1
+    elseif 0 < x <= 1
+        y = 2 * x
+    else
+        y = x^3
+    end
+\end{lstlisting}
+
+\begin{wa}
+    作业
+\end{wa}
+\begin{lstlisting}
+    function y = sort(x)
+    for i = 1 : 9
+        for j = 1 : 10-i
+            if x( j ) > x( j + 1 )
+                a = x( j );
+                x( j ) = x( j + 1 ); 
+                x( j + 1 ) = a ;
+            end
+        end
+        y = x ;
+    end
+\end{lstlisting}
 
 
 \end{document}
