@@ -352,6 +352,47 @@ C =
         y = x ;
     end
 \end{lstlisting}
-
-
+\begin{lstlisting}
+    function m =maxele( a ) 
+    ii = 1 ;
+    jj = 1 ;
+    i = 1 ; j = 1 ; 
+    m = a( i  ,  j ) ;
+    for i = 1 : 4   
+        for j = 1 : 5
+            if m < a( i , j )
+                m =  a( i , j ) ;
+                ii = i ;
+                jj = j ;
+            end
+        end
+    end
+    ii
+    jj
+    end
+\end{lstlisting}
+\begin{lstlisting}
+    function y = fac(x)
+    a = 1;
+    y = 0;
+    for n = 1 : x
+            a = a * n ;
+            y = y + a ;      
+    end 
+    end
+\end{lstlisting}
+\begin{lstlisting}
+    function y = balls(x)
+    y = 0 ;
+    s = 100 ;
+    for a = 1 : x
+        s = s / 2 ;
+        y = y + 2*s + s ;
+    end
+    s
+\end{lstlisting}
+\begin{lstlisting}
+    function y = cula (a,b)
+    y = a^2 + sin(a*b) + 2*b ;
+\end{lstlisting}
 \end{document}
