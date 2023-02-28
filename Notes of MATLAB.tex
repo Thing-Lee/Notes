@@ -205,7 +205,7 @@ C =
 \end{eg}
 \begin{lstlisting}
     %----提取某行、列----
-    a(1: 2, : )    %提取1、2行，所有列
+    a(1 : 2, : )    %提取1、2行，所有列
     a(2 : 2 : 100 , : )    %提取偶数行
     a( : , 1 : 2 : 99)    %提取奇数行
     a( : , 99 : -2 : 1)    %提取奇数行逆序
@@ -395,4 +395,135 @@ C =
     function y = cula (a,b)
     y = a^2 + sin(a*b) + 2*b ;
 \end{lstlisting}
+
+
+
+% -----------------23.02.28------------------
+\noindent \Large \section*{23.02.24} \par \normalsize
+\begin{eg}
+    "作业1"习题讲解
+\end{eg}
+\begin{lstlisting}
+    function y = sorted1( x )
+    a = randperm( x );
+    n = length( a ) ;
+    for i = 1 : n - 1
+        for j = n : -1 : i + 1    %起泡法从后往前排序
+            if a( j ) < a( j - 1 )
+                b = a( j - 1 ) ;
+                a( j - 1 ) = a( j ) ;
+                a( j ) = b ;
+            end
+            y = a
+        end
+    end
+\end{lstlisting}
+\begin{lstlisting}
+    function y = maxele1( m , n )
+    a = rand( m , n ) ;
+    ma = -inf ; w1 = [ ] ;
+    for i = 1 : m
+        for j = 1 : n
+            if a( i , j ) >= ma
+                ma = a( i , j ) ;
+                w = [ i , j ] ;
+                w1 = [ w1 ; w ] ;   %当有相同元素出现多个坐标的常见处理方法
+            end
+        end
+    end
+    y = ma ;
+\end{lstlisting}
+
+\begin{eg}
+    1.赋值语句
+\end{eg}
+\begin{lstlisting}
+    for i = 1 : 10
+        y = sin( i * pi / 180 ) ;
+    end
+\end{lstlisting}
+
+\begin{eg}
+    2.内存变量的删除和修改
+\end{eg}
+\begin{lstlisting}
+    save big.mat    %储存
+    load big.mat    %调用
+\end{lstlisting}
+
+\begin{eg}
+    3.常用数学函数
+\end{eg}
+\begin{lstlisting}
+    sin(n * pi / 180)  %弧度转换
+    abs(n)    %实数的绝对值、复数的模、字符串的ASCII码值
+    fix(n)    %函数取整
+    floor(n)
+    ceil(n)
+    round(n)
+    rem(x , y)    %当x 、y不同号，结果不同
+    mod(x , y)    %x、y必须为相同大小的实矩阵或为标量
+\end{lstlisting}
+
+\begin{eg}
+    4.矩阵元素
+\end{eg}
+\begin{lstlisting}
+    A(3 , 2) = 200    %通过下标引用矩阵元素
+    A = [ 1 , 2 , 3 ; 4 , 5 ,6 ] ;      %采用矩阵元素序号引用元素
+    A(3)
+    ans = 2     %在MATLAB中，列优先
+\end{lstlisting}
+
+\begin{eg}
+    5.矩阵拆分
+\end{eg}
+\begin{lstlisting}
+    A( : , j )      %取第j列全部元素
+    A( i , : )      %取第i行全部元素
+    A( i : i + m , : )      %第i到第i+m行全部元素
+    A( : , k : k + m)       %第k到第k+m列全部元素
+    A( 2 : end , : )    %第2到最后一行全部元素
+\end{lstlisting}
+
+\begin{eg}
+    6.特殊矩阵
+\end{eg}
+\begin{lstlisting}
+    zeros(n)    %零矩阵
+    ones(n)   %幺矩阵
+    eye(n)  %单位阵
+    rand(n) %0~1间随机均匀分布矩阵
+    randn(n)    %产生均值为0，方差为1的标准正态分布矩阵
+    reshape(A , m , n)  %将矩阵A重排为m*n
+\end{lstlisting}
+
+\begin{wa}
+    建立随机矩阵：
+    
+    (1)在区间$[20,50]$内均匀分布的$5$阶随机矩阵
+    
+    (2)均值为0.6，方差为0.1的5阶正态分布随机矩阵
+\end{wa}
+\begin{lstlisting}
+    x = 20 + (50 - 20)*rand(5)
+    y = 0.6 + sqrt(0.1)*randn(5)
+\end{lstlisting}
+
+\begin{eg}
+    7.魔法阵、$Vandermonde$阵、$Pascal$阵
+\end{eg}
+
+\begin{wa}
+    将101~125填入一个5行5列的表格中，使其每行每列及对角线的和均为565
+\end{wa}
+\begin{lstlisting}
+    M = 100 + magic(5)
+\end{lstlisting}
+
+\begin{eg}
+    8.对角阵、三角阵
+\end{eg}
+
+
 \end{document}
