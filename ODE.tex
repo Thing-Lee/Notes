@@ -273,7 +273,11 @@ $$\frac{dy}{\varphi(y)} = f(x)dx$$
 $$\int \frac{dy}{\varphi(y)} = \int f(x) \,dx + c \ \footnote{在ODE中此式代指一个函数，所以等式后加常数c；不同于数分中代指的是一族函数} $$
 \indent \ding{173}若$\varphi(y_{0}) = 0$，则有特解
 $$y = y_{0}$$
-综上：\dots
+综上：$
+\begin{cases}
+    G(y) = F(x) + C \\
+    y \equiv y_{i} , i = 1,2,\dots,k
+\end{cases}$
 
 \textbf{注：}变量分离方程可能是线性($\dfrac{dy}{dx} = xy$)，也可能是非线性($\dfrac{dy}{dx} = xy^{2}$)
 \\ \hspace*{\fill} \\
@@ -291,9 +295,31 @@ $$y = \pm e^{\overline{c}} \cdot e^{\int \limits P(x) \,dx } = ce^{\int \limits 
 \indent \ding{173}若$\varphi(y_{0}) = 0$，则上式$c = 0$
 
 \indent 故方程的解为\textcolor{red}{$y = ce^{\int \limits P(x) \,dx }$}，其中$c$为任意常数
+\\ \hspace*{\fill} \\
+\noindent \pmb{例2 \ PPT：}求解方程$\dfrac{dy}{dx} = y^{2} \cos x$，并求出满足初始条件：当$x = 0$时$y = 1$的特解
+
+\noindent \pmb{解：}
+$y \neq 0$时
+分离变量有
+$$\frac{dy}{y^{2}} = \cos x dx$$
+\indent 两边同时积分得
+$$\int \dfrac{dy}{y^{2}} = \int \cos x dx + c - \frac{1}{y} = \sin x + c$$
+\indent 通解为
+$$y = -\dfrac{1}{\sin x + c}$$
+\indent 且$y = 0$也是方程解，
+
+故原方程的解为$$
+\begin{cases}
+    y = -\dfrac{1}{\sin x + c} \\
+    y \equiv 0
+\end{cases}
+$$
+\indent 将初始条件$y(0) = 1$代入通解，得$c = -1$
+
+\indent 则满足所给条件的特解为$y = -\dfrac{1}{\sin x + c}$
 
 \subsection*{可化为变量分离方程的类型}
-\noindent \pmb{齐次微分方程：}
+\noindent \pmb{(1)齐次微分方程：}
 
 \noindent \textbf{定义：}方程形如$$\dfrac{dy}{dx} = g\left(\dfrac{y}{x}\right) $$
 
@@ -330,6 +356,188 @@ $$\sin u = cx$$
 \indent 若$\tan u = 0$，当$c = 0$时满足，为方程特解
 
 综上，原方程的通解为$\sin \dfrac{y}{x} = cx$
+\\ \hspace*{\fill} \\
+\noindent \pmb{(2)形如：}
+$$\dfrac{dy}{dx} = f(ax + by + c) \quad (a \neq 0 , b \neq 0)$$
+\textbf{求解步骤：}
+
+\indent 作变量变换
+$$u = ax + by + c$$
+\indent 两边对$x$求导
+$$\frac{du}{dx} = a + b\frac{dy}{dx}$$
+\indent 代回原方程得
+$$\frac{du}{dx} = a + bf(u)$$
+\\ \hspace*{\fill} \\
+\noindent \pmb{例6：}解方程
+$$\dfrac{dy}{dx} = (x + y)^{2}$$
+
+\noindent \pmb{解：}
+
+作变量变换
+$$u = x + y$$
+\indent 两边同时对$x$求导得
+$$\dfrac{du}{dx} = 1 + \dfrac{dy}{dx}$$
+\indent 代回原方程得
+$$\dfrac{du}{dx} = 1 + u^{2}$$
+\indent 分离变量有
+$$\dfrac{du}{1 + u^{2}} = dx \Rightarrow \int \frac{du}{1 + u^{2}} = \int dx + c \Rightarrow \arctan u = x + c$$
+\indent 将$u = x + y$代回原方程得
+$$\arctan(x + y) = x + c$$
+\\ \hspace*{\fill} \\
+\noindent \pmb{(3)形如：}
+$$\dfrac{dy}{dx} = f\left(\frac{a_{1}x + b_{1}y + c_{1}}{a_{2}x + b_{2}y + c_{2}}\right) $$
+\ding{172}当$c_{1} = c_{2} = 0 $
+$$\frac{dy}{dx} = f\left(\frac{a_{1} + b_{1}\dfrac{y}{x}}{a_{2} + b_{2}\dfrac{y}{x}}\right) = g\left(\dfrac{y}{x}\right)$$
+为齐次微分方程
+
+\ding{173}当$c_{1}$与$c_{2}$不同时为$0$
+
+思路：
+$$
+\begin{cases}
+    \overline{X} = x + A \\ 
+    \overline{Y} = y + B  
+\end{cases} 
+\Rightarrow f\left(\frac{a_{1}\overline{X} + b_{1}\overline{Y}}{a_{2}\overline{X} + b_{2}\overline{Y}} \right) = \frac{d\overline{Y} }{d\overline{X} }$$
+$$
+\begin{cases}
+    d\overline{X} = dx \\
+    d\overline{Y} = dy  
+\end{cases}$$
+
+观察：$
+\begin{cases}
+    a_{1}x + b_{1}y + c_{1} = 0 \\
+    a_{2}x + b_{2}y + c_{2} = 0
+\end{cases}$
+
+1>当$
+\begin{vmatrix}
+    a_{1} & b_{1} \\
+    a_{2} & b_{2}
+\end{vmatrix} \neq 0 $
+，有唯一解：$
+\begin{cases}
+    x = \alpha \\
+    y = \beta
+\end{cases}$
+
+设
+$$
+\begin{cases}
+    \overline{X} = x - \alpha \\ 
+    \overline{Y} = y - \beta  
+\end{cases}$$
+\indent 故有
+$$
+\begin{cases}
+    c_{1} = -a_{1}\alpha - b_{1}\beta \\
+    c_{2} = -a_{2}\alpha - b_{2}\beta 
+\end{cases} \Rightarrow
+f\left(\frac{a_{1}x + b_{1}y + c_{1}}{a_{2}x + b_{2}y + c_{2}}\right) = f\left(\frac{a_{1}\overline{X} + b_{1}\overline{Y}}{a_{2}\overline{X} + b_{2}\overline{Y}} \right) = \frac{d\overline{Y} }{d\overline{X} }$$
+
+2>当$
+\begin{vmatrix}
+    a_{1} & b_{1} \\
+    a_{2} & b_{2}
+\end{vmatrix} = 0 $
+
+(\romannumeral 1)
+
+\quad $\begin{array}{l}
+    a_{1} = b_{1} = 0 \Rightarrow \dfrac{dy}{dx} = f\left(\dfrac{c_{1}}{a_{2}x + b_{2}y + c_{2}}\right) \\
+    a_{2} = b_{2} = 0 \Rightarrow \dfrac{dy}{dx} = f\left(\dfrac{a_{1}x + b_{1}y + c_{1}}{c_{2}}\right)
+\end{array}$
+
+(\romannumeral 2)
+
+\quad $\begin{array}{l}
+    a_{1} = a_{2} = 0 \Rightarrow f\left(\dfrac{b_{1}y + c_{1}}{b_{2}y + c_{2}}\right) \\
+
+b_{1} = b_{2} = 0 \Rightarrow \dfrac{dy}{dx} = f\left(\dfrac{a_{1}x + c_{1}}{a_{2}x + c_{2}}\right) 
+\end{array} \quad \Rightarrow $变量分离
+
+(\romannumeral 3)
+
+\quad $\dfrac{a_{1}}{a_{2}} = \dfrac{b_{1}}{b_{2}} = k $
+令$u = a_{2}x + b_{2}y$，此时$\dfrac{du}{dx} = a_{2} + b_{2}\dfrac{dy}{dx}$
+
+\quad $\dfrac{dy}{dx} = f\left(\dfrac{k(a_{2}x + b_{2}y) + c_{1}}{(a_{2}x + b_{2}y) + c_{2}}\right) = f\left(\dfrac{ku + c_{1}}{u + c_{2}}\right) = g(u)$
+
+\quad $\dfrac{du}{dx} = a_{2} + b_{2}g(u)$ 
+\\ \hspace*{\fill} \\
+\noindent \pmb{例7：}解微分方程$$\dfrac{dy}{dx} = \dfrac{x - y + 1}{x + y - 3}$$
+
+\noindent \pmb{解：}
+代数方程$$
+\begin{cases}
+    x - y + 1 = 0 \\
+    x + y - 3 = 0
+\end{cases}$$
+
+求解$$\begin{vmatrix}
+    1 & -1 \\
+    1 & 1
+\end{vmatrix} = 2 \neq 0 
+\Rightarrow 
+\begin{cases}
+    x = 1 \\
+    y = 2
+\end{cases}$$
+
+令$$
+\begin{cases}
+    \overline{X} = x - 1 \\
+    \overline{Y} = y - 2
+\end{cases} $$
+
+则有$$\dfrac{d\overline{Y}}{d\overline{X}} = \dfrac{d\overline{X} - d\overline{Y}}{d\overline{X} + d\overline{Y}} = \dfrac{1 - \dfrac{\overline{Y}}{\overline{X}}}{1 + \dfrac{\overline{Y}}{\overline{X}}}$$
+
+上式为齐次微分方程，作变量变换
+
+$$u = \dfrac{\overline{Y}}{\overline{X}} \Rightarrow \overline{Y} = u\overline{X}$$
+
+上式两边同时对$\overline{X}$求导得
+$$\dfrac{d\overline{Y}}{d\overline{X}} = \dfrac{du}{d\overline{X}}\overline{X} + u$$
+
+故有
+\begin{align*}
+    & \dfrac{du}{d\overline{X}}\overline{X} + u = \dfrac{1 - u}{1 + u} \\
+    & \dfrac{du}{d\overline{X}}\overline{X} = \dfrac{1 - u - u - u^{2}}{1 + u} = \dfrac{1 - 2u - u^{2}}{1 + u}
+\end{align*}
+
+当$1 - 2u - u^{2} \neq 0 $，则有
+\begin{align*}
+    & \dfrac{1 + u}{1 - 2u - u^{2}} du = \dfrac{d\overline{X}}{\overline{X}} \\
+    & \dfrac{1}{2} \dfrac{d(u^{2} + 2u - 1)}{1 - 2u - u^{2}} = \dfrac{d\overline{X}}{\overline{X}} \\
+    -&\dfrac{1}{2} \int \dfrac{d(u^{2} + 2u - 1)}{u^{2} + 2u - 1} = \int \dfrac{d\overline{X}}{\overline{X}} + c     
+\end{align*}
+$$\ln \overline{X}^{2} = -\ln\left\lvert u^{2} + 2u - 1\right\rvert + \overline{c}$$
+$$\overline{X}^{2}(u^{2} + 2u - 1) = \pm e^{\overline{c}} = c_{1}$$
+
+代入原函数有
+$$\overline{Y}^{2} + 2\overline{X}\overline{Y} - \overline{X}^{2} = c_{1}$$
+$$(y - 2)^{2} + 2(x - 1)(y - 2) - (x - 1)^{2} = c_{1}$$
+
+此外，易知$1 - 2u - u^{2} = 0$，即有
+$$\overline{Y}^{2} + 2\overline{X}\overline{Y} - \overline{X}^{2} = 0$$
+
+也是方程解
+
+此时只用通解$c_{1} = 0$，即可
+
+故原式通解为
+$$y^{2} + 2xy - x^{2} - 6y - 2x = c$$
+
+$c$为任意常数
+\\ \hspace*{\fill} \\
+\noindent \pmb{例：}变量代换举例
+$$(1)x^{2}\dfrac{dy}{dx} = f(xy)$$
+$$(2)\dfrac{dy}{dx} = xf\left(\dfrac{y}{x^{2}}\right) $$
+
+(1)$u = xy \Rightarrow x\dfrac{du}{dx} = x + x^{2}\dfrac{dy}{dx} \Rightarrow x\dfrac{du}{dx} = x + f(u)$
+
+(2)$u = \dfrac{y}{x^{2}} \Rightarrow (y = ux^{2}) \Rightarrow \dfrac{dy}{dx} = \dfrac{du}{dx}x^{2} + 2ux = xf(u)$
 
 
 
