@@ -539,6 +539,112 @@ $$(2)\dfrac{dy}{dx} = xf\left(\dfrac{y}{x^{2}}\right) $$
 
 (2)$u = \dfrac{y}{x^{2}} \Rightarrow (y = ux^{2}) \Rightarrow \dfrac{dy}{dx} = \dfrac{du}{dx}x^{2} + 2ux = xf(u)$
 
+\newpage
+% ------------------2.2---------------------
+\section{线性微分方程与常数变易法}
+\noindent \pmb{概念：}
+\textbf{一阶线性微分方程}
+$$\dfrac{dy}{dx} = P(x)y + Q(x)$$
+
+\quad \textbf{一阶齐次线性微分方程}，$Q(x) = 0$
+$$\dfrac{dy}{dx} = P(x)y $$
+
+\quad \quad \quad 通解\textcolor{red}{$y = ce^{\int P(x) dx}$}
+
+
+\quad \textbf{一阶非齐次线性微分方程}，$Q(x) \neq 0$
+$$\dfrac{dy}{dx} = P(x)y + Q(x)$$
+
+
+\noindent \pmb{求解步骤：}
+
+\textbf{常数变易法}：将齐次微分方程中常数$c$变易为$x$的待定系数$c(x)$的方法
+
+已知
+$$y = c(x)e^{\int P(x) dx}$$
+
+求导得
+\begin{align*}
+    y' & = \left(c(x)e^{\int P(x) dx}\right)' \\
+    & = c'(x)e^{\int P(x) dx} + c(x)e^{\int P(x) dx}P(x)
+\end{align*}
+
+一阶线性方程求导
+$$y' = P(x)y + Q(x) = P(x)c(x)e^{\int P(x) dx} + Q(x)$$
+
+上面两个式子联立
+$$y'= c'(x)e^{\int P(x) dx} + c(x)e^{\int P(x) dx}P(x) = P(x)c(x)e^{\int P(x) dx} + Q(x)$$
+
+消去相同项有
+$$c'(x)e^{\int P(x) dx} = Q(x)$$
+
+即有
+$$c'(x) = Q(x)e^{-\int P(x) dx} $$
+
+两边同时积分得
+$$c(x) = \int Q(x)e^{-\int P(x) dx} dx+ \overline{c}$$
+
+将上式代入已知式子即得
+\textcolor{red}{$$y = e^{\int P(x) dx}\left(\int Q(x)e^{-\int P(x) dx} dx+ \overline{c}\right) $$}
+
+\noindent \pmb{例1：}解方程$(x + 1) \dfrac{dy}{dx} - ny = e^{x}(x + 1)^{n + 1}$
+
+\noindent \pmb{解：}
+
+将方程改写为
+$$\frac{dy}{dx} = \frac{n}{x + 1}y + e^{x}(x + 1)^{n}$$
+
+故
+$$P(x) = \frac{n}{x + 1} \quad Q(x) = e^{x}(x + 1)^{n}$$
+
+代入公式得
+\begin{align*}
+    y & = e^{\int \frac{n}{x + 1} dx}\left(\int e^{x}(x + 1)^{n} e^{-\int \frac{n}{x + 1} dx} dx + \overline{c}\right) \\
+    & = \left\lvert x + 1 \right\rvert ^{n}\left(\int e^{x}(x + 1)^{n} - \dfrac{1}{\left\lvert x + 1 \right\rvert ^{n}}dx + \overline{c}\right) 
+\end{align*}
+
+若$x + 1 > 0$
+\begin{align*}
+    y & = (x + 1)^{n}\left(\int e^{x}dx + \overline{c}\right) \\
+    & = (x + 1)^{n}\left(e^{x} + \overline{c}\right)
+\end{align*}
+
+若$x + 1 < 0$
+\begin{align*}
+    y & = (-1)^{n}(x + 1)^{n}\left(\int (-1)^{n}e^{x}dx + \overline{c}\right) \\
+    & = (x + 1)^{n}\left(e^{x} + (-1)^{n}\overline{c}\right)
+\end{align*}
+
+综上
+$$ y = (x + 1)^{n}\left(e^{x} + \overline{c}\right)$$
+\\ \hspace*{\fill} \\
+\noindent \pmb{例2：}求方程$\dfrac{dy}{dx} = \dfrac{y}{2x - y ^{2}}$的通解，并求$y(0) = 2$时的特解
+
+\noindent \pmb{解：}
+
+原方程不是线性微分方程，若$y \neq 0$，方程可改写为
+$$ \frac{dx}{dy} = \frac{2x - y^{2}}{y} = \frac{2x}{y} - y$$
+
+故
+$$P(y) = \frac{2}{y} \quad Q(y) = -y$$
+
+公式应为
+$$x = e^{\int P(y) dy}\left(\int Q(y) e^{-\int P(y) dy} + \overline{c}\right) $$
+
+代入公式得
+\begin{align*}
+    x & = e^{\int \frac{2}{y}dy}\left(\int (-y)e^{-\int \frac{2}{y}dy} dy+ \overline{c}\right) \\
+    & = \left\lvert y\right\rvert ^{2}\left(\int (-y)\frac{1}{\left\lvert y\right\rvert^{2} }dy + \overline{c}\right) \\
+    & = y^{2}(\ln\left\lvert y\right\rvert + \overline{c})
+\end{align*}
+
+将$x = 0$，$y = 2$代入上式
+$$0 = 4(-\ln 2 + \overline{c}) \Rightarrow \overline{c} = \ln 2$$
+
+故特解为
+$$x = y^{2}(\ln 2 - ln\left\lvert y\right\rvert )$$
+
+
 
 
 
