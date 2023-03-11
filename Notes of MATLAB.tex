@@ -13,6 +13,7 @@
 \usepackage[strict]{changepage} % 提供一个 adjustwidth 环境
 \usepackage{framed} % 实现方框效果
 \usepackage{amsthm}
+\usepackage{rotating}
 
 % ----------------插入代码----------------
 \usepackage{listings}
@@ -152,7 +153,7 @@
     format rat  %用分数形式表示数值
 \end{lstlisting}
 \par
-
+\newpage
 % -----------------23.02.24------------------
 \noindent \Large \section*{23.02.24} \par \normalsize
 \begin{eg}
@@ -397,12 +398,12 @@ C =
 \end{lstlisting}
 
 
-
+\newpage
 % -----------------23.02.28------------------
-\noindent \Large \section*{23.02.24} \par \normalsize
-\begin{eg}
-    "作业1"习题讲解
-\end{eg}
+\noindent \Large \section*{23.02.28} \par \normalsize
+\begin{wa}
+    “作业1”习题讲解
+\end{wa}
 \begin{lstlisting}
     function y = sorted1( x )
     a = randperm( x );
@@ -515,7 +516,7 @@ C =
 \end{eg}
 
 \begin{wa}
-    将101~125填入一个5行5列的表格中，使其每行每列及对角线的和均为565
+    将101-125填入一个5行5列的表格中，使其每行每列及对角线的和均为565
 \end{wa}
 \begin{lstlisting}
     M = 100 + magic(5)
@@ -524,6 +525,542 @@ C =
 \begin{eg}
     8.对角阵、三角阵
 \end{eg}
+
+
+
+
+\newpage
+% -----------------23.03.03------------------
+\noindent \Large \section*{23.03.03} \par \normalsize
+\begin{wa}
+    作业2：用diag构造一个100*100的矩阵
+    $$A =     
+    \begin{bmatrix}
+        1 & 2 & \dots & 100 \\
+        101 & 102 & \dots & 200 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        9901 & 9902 & \dots & 10000 
+    \end{bmatrix}$$
+\end{wa}
+\begin{lstlisting}
+    ones(100)*diag(1:100) + diag(0 : 100 : 9900)*ones(100)
+    ones(100)*diag(1:100) + 100 * diag(0 : 99)*ones(100)
+\end{lstlisting}
+
+\begin{eg}
+    1.矩阵的转置与旋转
+\end{eg}
+\begin{lstlisting}
+    A = [1 , 2 , 3 ;
+        4 , 5 , 6 ]
+    A'  %转置
+    rot90( A , 1)   %向右旋转90°
+    rot90( A , 2)   %向右旋转180°
+%---------------------------------------
+    >> A'
+    rot90( A , 1)
+    rot90( A , 2)
+
+    ans =
+
+         1     4
+         2     5
+         3     6
+
+
+    ans =
+
+         3     6
+         2     5
+         1     4
+
+
+    ans =
+
+         6     5     4
+         3     2     1
+\end{lstlisting}
+
+\begin{eg}
+    2.矩阵的翻转
+\end{eg}
+\begin{lstlisting}
+     A = [1 , 2 , 3 , 4;
+        5 , 6 , 7 , 8 ]
+    fliplr(A)   %左右翻转，也可通过设置步长为负数，即A = A(:,4:-1:1)
+    flipud(A)   %上下翻转
+
+    A =
+
+         1     2     3     4
+         5     6     7     8
+
+
+    ans =
+
+         4     3     2     1
+         8     7     6     5
+
+
+    ans =
+
+         5     6     7     8
+         1     2     3     4
+\end{lstlisting}
+
+\begin{eg}
+    3.矩阵的伪逆
+    当矩阵不为方阵或行列式为零
+\end{eg}
+\begin{lstlisting}
+    pinv(A)
+\end{lstlisting}
+
+\begin{eg}
+    4.向量的3种常用范数及其计算函数
+\end{eg}
+\begin{lstlisting}
+    norm(A,2)   %计算向量A的2—范数
+    norm(A,1)   %计算向量A的1—范数
+    norm(A,inf)    %计算向量A的$\infty$—范数
+\end{lstlisting}
+
+\begin{eg}
+    5.矩阵的特征值与特征向量
+\end{eg}
+\begin{lstlisting}
+    E = eig(A)    %求矩阵A的全部特征值构成向量E
+    [V , D] = eig(A)   %求矩阵A的全部特征值，构成对角阵D，求A的特征向量构成V的列向量
+%-------------------------------------------------
+    >>A = [1 , 2 , 3 ; 4 , 5 ,6 ; 7 , 8 , 9 ];
+    [V , D] = eig(A)
+    V =
+
+       -0.2320   -0.7858    0.4082
+       -0.5253   -0.0868   -0.8165
+       -0.8187    0.6123    0.4082
+
+
+    D =
+
+       16.1168         0         0
+             0   -1.1168         0
+             0         0   -0.0000
+
+\end{lstlisting}
+
+\begin{wa}
+    用特征值的方法解方程
+    $$3x^{5} - 7x^{4} + 5x^{2} + 2x - 18 = 0$$
+\end{wa}
+\begin{lstlisting}
+    p = [ 3 , -7 , 0 , 5 , 2 , -18 ];
+    A = compan(p);  %A的伴随矩阵
+    x1 = eig(A);    %求A的特征值
+    x2 = roots(p);  %求多项式p的零点
+\end{lstlisting}
+
+\begin{eg}
+   矩阵的秩：
+
+    1.最大阶非零子式阶数
+
+    2.线性无关的向量个数
+
+    3.阶梯形矩阵非零行个数 
+\end{eg}
+
+\begin{eg}
+    7.字符串
+
+    MATLAB将字符串当做一个行向量，每个元素对应一个字符
+\end{eg}
+\begin{lstlisting}
+    m = 'Yangtze';
+    a = abs(m)
+    a = double(m)
+    char(a)
+%---------------------------------------
+    >>a =
+
+    89    97   110   103   116   122   101
+
+
+    a =
+
+    89    97   110   103   116   122   101
+
+
+    ans =
+
+    Yangtze
+
+\end{lstlisting}
+
+\begin{wa}
+    建立一个字符串向量，对该向量进行如下处理
+
+    1.取第1~5个字符组成的子字符串
+
+    2.将字符串倒过来重新排列
+
+    3.将字符串中的小写字母边成相应的大写字母
+
+    4.统计字符串中小写字母的个数
+\end{wa}
+\begin{lstlisting}
+    ch = 'ABc123d4ceFg56H9';
+    subch = ch(1 : 5)   %取子字符串
+    revch = ch(end : -1 : 1)    %将字符串倒排
+    k = find(ch >= 'a' & ch <= 'z');    %找小写字母位置
+    ch(k) = ch(k) - ('a' - 'A');    %变为大写字母
+    char(ch)
+    length(k)   %统计小写字母个数
+\end{lstlisting}
+
+\begin{eg}
+    8.结构数据和单元数据
+\end{eg}
+\begin{lstlisting}
+    a(1).x1 = '123';    %给a中任意一个元素增加一个成员x4
+    a = rmfield(a, x4)  %删除x4    
+\end{lstlisting}
+
+\begin{eg}
+    9.单元数据
+\end{eg}
+\begin{lstlisting}
+    b{ 3 , 3};    %引用单元矩阵元素
+    celldisp(b)    %显示整个单元矩阵
+\end{lstlisting}
+
+\begin{eg}
+    10.稀疏存储
+
+    仅存储非零元的值和位置
+\end{eg}
+
+
+
+\newpage
+% -----------------23.03.07------------------
+\noindent \Large \section*{23.03.07} \par \normalsize
+\begin{wa}
+    作业2：试用简单矩阵生成下面的矩阵
+$$
+\begin{bmatrix}
+    % 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 \\
+    % 10 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 10 \\
+    % 10 & 9 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 2 & 2 & 2 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 1 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 1 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 2 & 2 & 2 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 8 & 9 & 10 \\
+    % 10 & 9 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 9 & 10 \\
+    % 10 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 9 & 10 \\
+    % 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 
+    
+    10 & \dots & 10 & 10 & 10 & \dots & 10 \\
+     & \ddots & \vdots & \vdots & \vdots & \begin{rotate}{60} $\ddots$ \end{rotate} \\
+    10 & \cdots & 1 & 1 & 1 & \cdots & 10 \\
+    10 & \cdots & 1 & 0 & 1 & \cdots & 10 \\
+    10 & \cdots & 1 & 1 & 1 & \cdots & 10 \\
+    & \begin{rotate}{70} $\ddots$ \end{rotate} & \vdots & \vdots & \vdots & \ddots\\
+    10 & \cdots & 10 & 10 & 10 &\cdots & 10
+\end{bmatrix}
+$$
+\end{wa}
+\begin{lstlisting}
+    n = 11;
+    a = ones(n);    %生成一个全1矩阵
+    a1 = triu(a*diag(0 : n-1));    %生成一个0到10的上三角阵
+    a2 = a1 + triu(a1,1)';     %生成目标矩阵的右下角部分，从0到10 
+    a2 = [fliplr(a2),a2];    %矩阵向左翻转，拼接
+    a2(: , n) = [];    %去掉中间重复的一列
+    a2 = [flipud(a2),a2];   %向上翻转，拼接
+    a2(n , :) = [];    %去掉中间重复的一行
+\end{lstlisting}
+
+\begin{eg}
+    1.input命令
+\end{eg}
+\begin{wa}
+    将华氏温度$f$转化为摄氏温度$c$
+\end{wa}
+\begin{lstlisting}
+    f = input('Input Fahrenheit Temperature:');
+    c = 5*(f - 32) / 9
+\end{lstlisting}
+\begin{wa}
+    输入$x$，$y$值，并将它们的值互换后输出
+\end{wa}
+\begin{lstlisting}
+    x = input('x =');
+    y = input('y =');
+    z = x;
+    x = y;
+    y = z;
+    disp(x);
+    disp(y);
+\end{lstlisting}
+
+\begin{eg}
+    2.disp数据输出
+\end{eg}
+\begin{wa}
+    求一元二次方程$ax^{2} + bx + c = 0$的根
+\end{wa}
+\begin{lstlisting}
+    a = input('a = ');
+    b = input('b = ');
+    c = input('c = ');
+    d = b*b - 4*a*c;
+    x = [(-b + sqrt(d)) / (2*a) , (-b - sqrt(d)) / (2*a)];
+    disp(['x1 = ' , num2str(x(1)) , 'x2 = ' , num2str(x(2))])   %num2str(x(2))字符串，无法再进行加减
+\end{lstlisting}
+
+\begin{eg}
+    3.switch语句
+\end{eg}
+\begin{lstlisting}
+    price = input('input price : ');
+    switch fix(price/100)
+        case {0 , 1}
+            rate = 0;
+        case {2 , 3 , 4}
+            rate = 3 / 100;
+        case num2cell(5 : 9)
+            rate = 5 / 100;
+        otherwise
+            rate = 8 / 100;
+    end
+    price = price*(1 - rate)
+\end{lstlisting}
+
+\begin{eg}
+    4.try语句
+\end{eg}
+\begin{lstlisting}
+    try
+        a = a + q
+        disp('a')
+    catch
+        disp('error')
+        a = nan
+    end
+\end{lstlisting}
+
+\begin{eg}
+    5.pause暂停时间间隔
+\end{eg}
+\begin{lstlisting}
+    a = 0 ;
+    for k = 1 : 10
+        a = a + 1 
+        pause(1)    %输出一个值间隔一秒
+    end
+\end{lstlisting}
+
+\begin{eg}
+    6.break和continue，停止和跳过
+\end{eg}
+\begin{lstlisting}
+    a = 0 ;
+    for k = 1 : 10
+        a = a + 1 
+        pause(1)
+    end
+\end{lstlisting}
+
+\begin{wa}
+    输出全部水仙花数
+\end{wa}
+\begin{lstlisting}
+    for m = 1 : 999
+        m1 = fix(m / 100);
+        m2 = rem(fix(m / 10) , 10);
+        m3 = rem(m , 10);
+        if m == m1*m1*m1 + m2*m2*m2 + m3*m3*m3
+            disp(m)
+        end
+    end
+\end{lstlisting}
+
+\begin{wa}
+    从键盘输入若干个数，当输入0时结束输入，求这些数的平均值和它们的和
+\end{wa}
+\begin{lstlisting}
+    sum = 0;
+    cnt = 0;
+    val = input('please input a number : ');
+    while (val ~= 0)
+        sum = sum + val;
+        cnt = cnt + 1;
+        val = input('please input a number : ');
+    end
+    if (cnt > 0)
+        sum
+        mean = sum / cnt
+    end
+\end{lstlisting}
+
+\begin{eg}
+    8.循环嵌套
+\end{eg}
+\begin{wa}
+    求1到500之间的全部完数（这个数等于它的各个真因子之和）
+\end{wa}
+\begin{lstlisting}
+    for m = 1 : 500
+        s = 0;
+        for k = 1 : m/2
+            if rem(m , k) == 0
+                s = s + k;
+            end
+        end
+        if m == s
+            disp(m);
+        end
+    end
+\end{lstlisting}
+
+
+\newpage
+% -----------------23.03.10------------------
+\noindent \Large \section*{23.03.10} \par \normalsize
+\begin{wa}
+    作业3
+\end{wa}
+\begin{lstlisting}
+    m = fix(100*rand) ;
+    k = 1 ;
+    for k = 1 : 7 
+        k = k + 1 ;
+        n = input('please input a number:');
+        if m == n
+            disp('won!');
+            break ;
+        elseif n > m
+            disp('high!');
+        else
+            disp('low!');
+        end
+    end
+    disp('game over!');
+    % ------------------------------------------
+    m = input('please input the last number:');
+    n = 2 : m;
+    for i = 2 : sqrt(m)   %根号m是m最大的因子，提高运算效率
+        for j = 2*i : i : m %以倍数为步长
+            n(j) = 0;
+        end
+    end
+    a = find(n ~= 0);
+    disp(n(a));
+    % ------------------------------------------
+    n = input('please input the last number:');
+    a = zeros(n, 1);    %将a设置为n行1列的空矩阵，元素全为0
+    a(1) = 1;
+    a(2) = 2;
+    for k = 3 : n
+        a(k) = a(k-1) + a(k-2);
+    end
+    disp(a(n));
+\end{lstlisting}
+\begin{eg}
+    1.plot \ 点、线
+\end{eg}
+\begin{lstlisting}
+    x = linspace(0,2*pi,30);
+    y = sin(x);
+    z = cos(x);
+    plot(x,y,'r' ,x,z,'go')
+\end{lstlisting}
+
+\begin{eg}
+    2.ezplot \ 隐函数绘图、参数方程绘图
+\end{eg}
+\begin{lstlisting}
+    ezplot('sin(x)' , [0 , pi])
+    ezplot('cos(t)^3' , 'sin(t)^3' , [0 , 2*pi])    %星形图
+    ezplot('exp(x) + sin(x*y)' , [-2 , 0.5 ,0 , 2])  %[-2,0.5][0,2]上的隐函数图
+\end{lstlisting}
+
+\begin{eg}
+    3.fplot \ 自定义函数
+\end{eg}
+\begin{lstlisting}
+    fplot('tanh' , [-2 , 2])
+    fplot('[tanh(x) , sin(x) , cos(x)]' , 2*pi*[-1 , 1])
+\end{lstlisting}
+
+\begin{eg}
+    4.坐标变换
+\end{eg}
+\begin{lstlisting}
+    x = logspace(-1, 2);    %logspace生成对数间隔向量
+    loglog(x, exp(x) , '-s')    %全对数函数
+    grid on
+% ---------------------------------
+    x = 0 : .1 : 10 ;
+    semilogy(x , 10.^x)     %半对数函数
+\end{lstlisting}
+
+\begin{eg}
+    5.空间曲线 —— 单条曲线
+\end{eg}
+\begin{lstlisting}
+    t = 0 : pi/50 : 10*pi;
+    plot3(sin(t) , cos(t) , t)
+\end{lstlisting}
+
+\begin{eg}
+    6.空间曲线 —— 多条曲线
+\end{eg}
+\begin{lstlisting}
+    x = -3 : .1 : 3 ;
+    y = 1 : .1 : 5 ;
+    [X , Y] = meshgrid(x, y);
+    Z = (X + Y) .^ 2;
+    plot3(X , Y , Z)    %线性曲面
+    surf(X, Y, Z)   %曲面
+    shading flat    %平滑
+    mesh(X, Y, Z)   %网格曲面
+    
+
+    Z = peaks;
+    surf(Z)
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
