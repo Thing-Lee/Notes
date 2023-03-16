@@ -1046,7 +1046,158 @@ $$
 
 
 
+\newpage
+% -----------------23.03.14------------------
+\noindent \Large \section*{23.03.14} \par \normalsize
+\begin{eg}
+    1.图形处理
+\end{eg}
+\begin{lstlisting}
+    grid on     %添加格栅
+    grid off    %删除格栅
+% ---------------------------------
 
+    hh = xlabel(txt)
+    hh = ylabel(txt)
+    hh = zlabel(txt)
+    hh = title(txt)
+
+    x=linspace(0,2*pi,30); 
+    y=sin(x); 
+    plot(x,y) 
+    xlabel('自变量X') 
+    ylabel('函数Y') 
+    title('示意图') 
+    grid on
+% ---------------------------------
+    hh = gtext('txt')    %随鼠标移动十字添加标注
+
+    x=linspace(0,2*pi,30); 
+    y=sin(x); 
+    z=cos(x); 
+    plot(x,y,x,z) 
+    gtext('sin(x)');gtext('cos(x)') 
+\end{lstlisting}
+
+\begin{eg}
+    2.定制坐标 axis
+\end{eg}
+\begin{lstlisting}
+    x=linspace(0.0001,0.01,1000); 
+    y=sin(1./x); 
+    plot(x,y) 
+    axis([0.005 0.01 -1 1]) 
+\end{lstlisting}
+
+\begin{eg}
+    3.图形保持
+\end{eg}
+\begin{lstlisting}
+    hold on 
+    hold off
+
+    x=linspace(0,2*pi,30); 
+    y=sin(x); 
+    z=cos(x);
+    plot(x,z);
+    hold on 
+    plot(x,y);
+% ---------------------------------
+    figure(h)
+   
+    x=linspace(0,2*pi,100); 
+    y=sin(x);
+    z=cos(x); 
+    plot(x,y); 
+    title('sin(x)'); 
+    pause 
+    figure(2); 
+    plot(x,z); 
+    title('cos(x)');
+
+\end{lstlisting}
+
+\begin{eg}
+    4.切割窗口subplot
+\end{eg}
+\begin{lstlisting}
+    h=subplot(mrows,ncols,thisplot) 
+
+    x=linspace(0,2*pi,100); 
+    y=sin(x); z=cos(x);   
+    a=sin(x).*cos(x);
+    b=sin(x)./(cos(x)+eps) 
+    subplot(2,2,1);plot(x,y),title('sin(x)') 
+    subplot(2,2,2);plot(x,z),title('cos(x)') 
+    subplot(2,2,3);plot(x,a),title('sin(x)cos(x)') 
+    subplot(2,2,4);plot(x,b),title('sin(x)/cos(x)')
+\end{lstlisting}
+
+\begin{eg}
+    5.缩放图形 zoom 
+\end{eg}
+\begin{lstlisting}
+    zoom on
+    zoom off
+
+    x=linspace(0,2*pi,30); 
+    y=sin(x); 
+    plot(x,y) 
+    zoom on
+\end{lstlisting}
+
+\begin{eg}
+    6.改变视角 view
+\end{eg}
+\begin{lstlisting}
+    view(a , b)    %a是方位角，b是仰角，缺省视角(37.5 , 30)
+    view([x,  y , z])
+
+    x = -3 : 0.1 : 3;   
+    y = 1 : 0.1 : 5; 
+    [X , Y] = meshgrid(x , y); 
+    Z = (X + Y) .^ 2; 
+    subplot(2,2,1), mesh(X,Y,Z) 
+    subplot(2,2,2), mesh(X,Y,Z),view(50,-34) 
+    subplot(2,2,3), mesh(X,Y,Z),view(-60,70) 
+    subplot(2,2,4), mesh(X,Y,Z),view(0,1,1) 
+\end{lstlisting}
+
+\begin{eg}
+    7.动画 moviein() , getframe , movie() 
+\end{eg}
+\begin{lstlisting}
+    [x , y , z] = peaks(30);         
+    surf(x,y,z) 
+    axis([ -3 3 -3 3 -10 10]) 
+    m = moviein(15); 
+    for i = 1 : 15 
+        view(-37.5 + 24*(i-1) , 30) 
+        m(:,i) = getframe; 
+    end 
+    movie(m)
+\end{lstlisting}
+
+\begin{eg}
+    8.特殊二维图形函数
+\end{eg}
+\begin{lstlisting}
+% -------------极坐标图--------------------
+    polar (theta,rho,s) 
+
+    theta = linspace(0,2*pi),                         
+    rho=sin(2*theta).*cos(2*theta); 
+    polar(theta,rho,'g') 
+    title('Polar plot of sin(2*theta).*cos(2*theta)');
+% -------------散点图--------------------
+    scatter(X,Y,S,C)    %X,Y大小必须相同
+% -------------平面等值线图--------------------
+    [X , Y] = meshgrid( -2 : .2 : 2 , -2 : .2 : 3); 
+    Z = X.*exp(-X.^2 - Y.^2); 
+    [C , h] = contour(X,Y,Z); 
+    clabel(C,h) 
+    colormap cool 
+\end{lstlisting}
 
 
 
