@@ -2,12 +2,14 @@
 
 ## settings
 
-** LaTeX、MATLAB的配置文件 **
+是LaTeX、MATLAB的配置文件
 
-我发现我的笔记本上加LaTeX的配置不起作用且报错，最后的解决方案是直接
+我发现我的笔记本上加LaTeX的配置不起作用不能保存且报错，最后的解决方案是直接
 > \usepackage[UTF8]{ctex}
 
 不用管JSON
+
+然而在台式电脑上LaTeX和SumatraPDF的互相查找定位也有问题
 
 ## Notes of MATLAB
 上数学软件这门课做的笔记，都是很浅显的东西
